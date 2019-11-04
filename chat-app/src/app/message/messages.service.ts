@@ -3,7 +3,8 @@ import {Subject, Observable} from 'rxjs';
 import {Message} from '../message/message.model';
 import {User} from '../user/user.model';
 import {Thread} from '../thread/thread.model';
-import {map, filter, scan} from 'rxjs/operators';
+import {map, filter, scan, publishReplay, refCount} from 'rxjs/operators';
+//import{scan} from 'rxjs/add/operator/scan';
 
 const initialMessages: Message[] = [];
 
@@ -26,28 +27,31 @@ export class MessagesService {
 
   constructor() {
 
-    this.messages = this.updates
-      .scan((messages: Message[],
+    this.messages = this.updates.pipe(
+      scan((messages: Message[],
         operation: IMessagesOperation) => {
           return operation(messages);
         },
-        initialMessages)
-      .publishReplay(1)
-      .refCount();
+        initialMessages),
+      publishReplay(1),
+      refCount()
+    )
 
-    this.create
-        .map(function(message:Message): IMessagesOperation{
+    this.create.pipe(
+        map(function(message:Message): IMessagesOperation{
           return (messages: Message[]) =>{
             return messages.concat(message);
           };
-        })
+        }))
+        //subscribeOn(this.updates)
         .subscribe(this.updates);
+    
 
     this.newMessages
         .subscribe(this.create);
 
-    this.markThreadAsRead
-        .map((thread: Thread) => {
+    this.markThreadAsRead.pipe(
+        map((thread: Thread) => {
           return (messages: Message[]) => {
             return messages.map((message: Message) => {
               if(message.thread.id === thread.id){
@@ -56,8 +60,9 @@ export class MessagesService {
               return message;
             });
           };
-        })
+        }))
         .subscribe(this.updates);
+    
    }
 
    addMessage(message: Message): void{
@@ -65,10 +70,10 @@ export class MessagesService {
    }
 
    messagesForThreadUser(thread: Thread, user: User): Observable<Message>{
-     return this.newMessages
-      .filter((message: Message) => {
+     return this.newMessages.pipe(
+      filter((message: Message) => {
         return (message.thread.id === thread.id) && (message.author.id !== user.id);
-      });
+      }));
    }
 }
 
