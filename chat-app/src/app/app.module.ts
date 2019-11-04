@@ -7,6 +7,10 @@ import { ChatNavBarComponent } from './chat-nav-bar/chat-nav-bar.component';
 import { ChatThreadsComponent } from './chat-threads/chat-threads.component';
 import { ChatWindowComponent } from './chat-window/chat-window.component';
 
+import { UsersService } from './user/users.service';
+import { ThreadsService } from './thread/threads.service';
+import { MessagesService } from './message/messages.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +22,11 @@ import { ChatWindowComponent } from './chat-window/chat-window.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    MessagesService,
+    ThreadsService,
+    UsersService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
