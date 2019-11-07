@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
 //Importing the services
 import { UsersService } from './user/users.service';

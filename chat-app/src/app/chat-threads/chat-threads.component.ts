@@ -9,14 +9,10 @@ import { ThreadsService } from './../thread/threads.service';
   templateUrl: './chat-threads.component.html',
   styleUrls: ['./chat-threads.component.css']
 })
-export class ChatThreadsComponent implements OnInit {
-
+export class ChatThreadsComponent{
   threads: Observable<any>;
 
   constructor(public threadsService: ThreadsService) {
     this.threads = threadsService.orderedThreads;
   }
-  ngOnInit() {
-  }
-
 }
