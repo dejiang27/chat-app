@@ -21,6 +21,7 @@ export class ChatWindowComponent implements OnInit {
   currentThread: Thread;
   draftMessage: Message;
   currentUser: User;
+  windows:string = "display";
 
   constructor(public messagesService: MessagesService,
               public threadsService: ThreadsService,
@@ -66,7 +67,20 @@ export class ChatWindowComponent implements OnInit {
     this.messagesService.addMessage(m);
     this.draftMessage = new Message();
   }
+  hideorplay():string{
+    if(this.windows == "display"){
+      this.windows = "No";
+      console.log(this.windows);
+      return this.windows;
+    }else{
+      this.windows = "display";
+      console.log(this.windows);
+      return this.windows;
+    }
 
+  }
+
+  closeW(){}
   scrollToBottom(): void {
     const scrollPane: any = this.el
       .nativeElement.querySelector('.msg-container-base');

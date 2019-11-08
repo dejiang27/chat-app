@@ -1,5 +1,5 @@
 <div class="chat-window-container">
-        <div class="chat-window">
+        <div class="chat-window"  >
           <div class="panel-container">
             <div class="panel panel-default">
       
@@ -10,14 +10,13 @@
                     Chat - {{currentThread.name}}
                   </h3>
                 </div>
-                <!--
+                
                 <div class="panel-buttons-container">
-                   you could put minimize or close buttons here
-                  <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_minim"></span></a>
-                  <a href="#"><span class="glyphicon glyphicon-remove icon_close" data-id="chat_window_1"></span></a>
+                  <a (click)="hideorplay()"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_minim"></span></a>
+                  <a (click)="closeW()"><span class="glyphicon glyphicon-remove icon_close" data-id="chat_window_1"></span></a>
 
                 </div>
-              -->
+              
               </div>
       
               <div class="panel-body msg-container-base">
@@ -45,17 +44,7 @@
           </div>
         </div>
       </div>
-      
+</div>
 
-<!--
-<script>
-    $(document).on('focus', '.panel-footer input.chat_input', function (e) {
-    var $this = $(this);
-    if ($('#minim_chat_window').hasClass('panel-collapsed')) {
-        $this.parents('.panel').find('.panel-body').slideDown();
-        $('#minim_chat_window').removeClass('panel-collapsed');
-        $('#minim_chat_window').removeClass('glyphicon-plus').addClass('glyphicon-minus');
-    }
-});
-</script>
--->
+
+
