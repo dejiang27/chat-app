@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import{AuthService} from '../services/auth.service';
 @Component({
   selector: 'app-chat-page',
   templateUrl: './chat-page.component.html',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authservice: AuthService) { }
 
   ngOnInit() {
   }

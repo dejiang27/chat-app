@@ -16,7 +16,13 @@ import { MessagesService } from './message/messages.service';
 
 import { FromNowPipe } from './pipes/from-now.pipe';
 import { FormsModule } from '@angular/forms';
+
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+
+import {AuthService, AUTH_PROVIDERS} from './services/auth.service';
+import { ProtectedComponent } from './protected/protected.component';
+import {LoggedInGuard} from './logged-in.guard';
 
 @NgModule({
   declarations: [
@@ -28,7 +34,9 @@ import { LoginComponent } from './login/login.component';
     ChatMessageComponent,
     ChatThreadComponent,
     FromNowPipe,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent,
+    ProtectedComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +46,10 @@ import { LoginComponent } from './login/login.component';
   providers: [
     MessagesService,
     ThreadsService,
-    UsersService
+    UsersService,
+    AuthService,
+    LoggedInGuard,
+    AUTH_PROVIDERS
   ],
   bootstrap: [AppComponent]
 })

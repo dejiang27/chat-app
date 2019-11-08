@@ -1,1 +1,38 @@
-<p>login works!</p>
+<div>
+<form class="form-inline" *ngIf="!authservice.getUser()"> 
+    <div class="form-group">
+        <label for="username">User: (type <em>user</em>)</label>
+        <input class="form-control" name="username" #username> 
+    </div>
+    <div class="form-group">
+        <label for="password">Password: (type <em>password</em>)</label> 
+        <input class="form-control" type="password" name="password" #password>
+    </div>
+    <div>
+    <a class="btn btn-default" (click)="login(username.value, password.value)" [routerLink]="['/chat']">
+        Login
+    </a>
+    </div>
+</form>
+</div>
+
+<div class="well" *ngIf="authservice.getUser()"> Logged in as 
+    <b>{{ authservice.getUser() }}</b> 
+    &nbsp;
+    &nbsp;
+
+    <button type="button" class="btn btn-link" href (click)="logout()">Log out</button>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+
+    <button type="button" class="btn btn-link" [routerLink]="['/chat']">Go to Chat page</button>
+    <!--
+    <app-chat-page></app-chat-page>
+    -->
+
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="message"> 
+    {{ message }}
+</div>
