@@ -1,6 +1,5 @@
 # chat-app
 
-Dejiang Chen
 GitHub URL: https://github.com/dejiang27/chat-app
 
 The user is able to login with the username chandlergegg@gmail.com and password csc436!. 
